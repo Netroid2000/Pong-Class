@@ -18,14 +18,12 @@ class Paddle {
     moveUpCollision(ball){
         if(Math.sign(ball.speedy) == 1){
             ball.speedy *= -1;
-            console.log("pego");
         }
     }
 
     moveDownCollision(ball){
         if(Math.sign(ball.speedy) == -1){
             ball.speedy *= -1;
-            console.log("pego");
         }
     }
 

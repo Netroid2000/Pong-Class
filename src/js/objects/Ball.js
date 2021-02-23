@@ -9,11 +9,11 @@ class Ball {
         //imagen
         this.img = loadImage("/src/assets/sprites/ball.png");
         //velocidad
-        this.speedx = 5 * randomPolarity();
-        this.speedy = 4 * randomPolarity();
+        this.speedx = ballIni.speedX * randomPolarity();
+        this.speedy = ballIni.speedY * randomPolarity();
     }
     
-    collision(players){
+    collision(players, ballSoundKick){
         //Comprobar si hubo colision con algun Paddle
         players.forEach((player) => {
             //Saber la direccion en la que se encuentra el jugador
@@ -27,6 +27,8 @@ class Ball {
                     ))
                 {
                     this.speedx *= -1;
+                    this.speedx = speedAugment(this.speedx);
+                    ballSoundKick.play();
                     //Cambio de direccion en Y
                     player.collision(this);
                 }
@@ -41,6 +43,9 @@ class Ball {
                     ))
                 {
                     this.speedx *= -1;
+                    this.speedx = speedAugment(this.speedx);
+                    this.speedY = speedAugment(this.speedY);
+                    ballSoundKick.play();
                     player.collision(this);
                 }
             }
@@ -60,17 +65,21 @@ class Ball {
         this.y += this.speedy;
     }
 
-    draw() {
+    draw(players, ballSoundKick) {
         image(this.img, this.x, this.y, this.width, this.height);
         this.move();
+        //validar que el arreglo de jugadores nunca llegue vacie y asi que no explote el mundo
+        if(players != null && ballSoundKick != null && ballSoundKick.isLoaded() ){
+            this.collision(players, ballSoundKick);
+        }
     }
 
     //Reinicia los valores de la bola por si se muere o se reinicia la partida
     restart() {
         this.x = ballIni.xIni;
         this.y = ballIni.yIni;
-        this.speedx *= randomPolarity();
-        this.speedy *= randomPolarity();
+        this.speedx = ballIni.speedX * randomPolarity();
+        this.speedy = ballIni.speedY * randomPolarity();
     }
 }
 
