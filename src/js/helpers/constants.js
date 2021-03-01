@@ -25,3 +25,8 @@ const ballIni = {
 const music =  {
     start: .2, 
 }
+
+const ballHitBox = {
+    plusX: 19,
+    plusy: 19,
+}

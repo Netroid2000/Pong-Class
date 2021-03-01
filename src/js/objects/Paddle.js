@@ -12,12 +12,18 @@ class Paddle {
         this.speed = 5;
         //Controles
         this.controllSettings = controllSettings;
+        //HitBox
+        this.hb = new HitBoxSquare(
+            HitBoxFactory.coords(this.x + 8, this.y + 8),
+            HitBoxFactory.squareDims(19, 110.5),
+        );
     }
 
     //Estructura basada en la del movimiento del Paddle
     moveUpCollision(ball){
         if(Math.sign(ball.speedy) == 1){
             ball.speedy *= -1;
+            
         }
     }
 
@@ -38,14 +44,16 @@ class Paddle {
     }
     
     moveUp() {
-        if(this.y >= 0){
+        if(this.hb.y >= 0){
             this.y -= this.speed;
+            this.hb.y -= this.speed;
         }
     }
 
     moveDown(){
-        if(this.y <= board.height - paddle.height){
+        if(this.hb.y <= board.height - this.hb.height){
             this.y += this.speed;
+            this.hb.y += this.speed;
         }
     }
 
@@ -60,6 +68,7 @@ class Paddle {
     draw(ball) {
         image(this.img, this.x, this.y, this.width, this.height)
         this.move(ball);
+        this.hb.draw();
     }
 }
 

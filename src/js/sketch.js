@@ -12,7 +12,7 @@ function preload() {
 
 function setup(){
     bg = loadImage("/src/assets/sprites/board.png");
-    ball = new Ball(BallFactory.coords(ballIni.xIni, ballIni.yIni));
+    
     
     //Creacion de Jugadores
     players.push(
@@ -28,6 +28,7 @@ function setup(){
             PaddleFactory.controllSettings(38, 40),
         )
     );
+    ball = new Ball(BallFactory.coords(ballIni.xIni, ballIni.yIni), players);
     //Musica
     mySoundLoop.loop(music.start);
     
@@ -36,6 +37,6 @@ function setup(){
 
 function draw() {
     background(bg);
-    ball.draw(players, ballSoundKick);
+    ball.draw(players);
     players.forEach((player) => player.draw());
 }
