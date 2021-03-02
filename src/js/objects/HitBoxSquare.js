@@ -7,7 +7,6 @@ class HitBoxSquare{
     }
     //hbs = hitboxSquare
     wasHitSquare(hbs){
-
         return (
             hbs.x < this.x + this.width &&
             hbs.x + hbs.width > this.x &&

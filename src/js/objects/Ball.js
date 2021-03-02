@@ -28,11 +28,12 @@ class Ball {
         
         if(this.x < 0 || this.x >= board.width - this.width){
             this.restart();
-        } else if(this.players.some((player) => player.hb.wasHitSquare(this.hb))){
+        } 
+        /*if(this.players.some((player) => player.hb.wasHitSquare(this.hb))){
             this.speedx = speedAugment(this.speedx);
             this.speedx *= -1;
             this.ballSoundKick.play();
-        }
+        }*/
         if(this.y < 0 || this.y >= board.height - this.height){
             this.speedy *= -1;
         }

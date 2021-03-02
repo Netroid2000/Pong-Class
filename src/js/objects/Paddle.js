@@ -12,11 +12,21 @@ class Paddle {
         this.speed = 5;
         //Controles
         this.controllSettings = controllSettings;
-        //HitBox
-        this.hb = new HitBoxSquare(
-            HitBoxFactory.coords(this.x + 8, this.y + 8),
-            HitBoxFactory.squareDims(19, 110.5),
-        );
+        //HitBoxs
+        this.hbs = [ 
+            new HitBoxSquare(
+                HitBoxFactory.coords(this.x + 8, this.y + 8),
+                HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
+            ),
+            new HitBoxSquare(
+                HitBoxFactory.coords(this.x + 8, (this.y + paddleHitBox.height)  + 8),
+                HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
+            ),
+            new HitBoxSquare(
+                HitBoxFactory.coords(this.x + 8, this.y + (paddleHitBox.height*2)  + 8),
+                HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
+            ),
+        ];
     }
 
     //Estructura basada en la del movimiento del Paddle
@@ -44,17 +54,34 @@ class Paddle {
     }
     
     moveUp() {
-        if(this.hb.y >= 0){
+        
+        this.hbs.forEach(function(hb){
+            console.log("entro FOR EACH");
+            if(hb.y >= 0){
+                //this.y -= this.speed;
+                hb.y -= this.speed;
+            }
+        }.bind(this));
+
+        if(this.y >= 0){
             this.y -= this.speed;
-            this.hb.y -= this.speed;
         }
+        console.log("entro");
     }
 
     moveDown(){
-        if(this.hb.y <= board.height - this.hb.height){
+          
+        this.hbs.forEach(function(hb){
+            console.log("entro ENTRO FOR EACH");
+            if(hb.y <= board.height - hb.height){
+                //this.y += this.speed;
+                hb.y += this.speed;
+            }
+        }.bind(this));
+        if(this.y <= board.height - paddle.height){
             this.y += this.speed;
-            this.hb.y += this.speed;
         }
+        console.log("entro"); 
     }
 
     move() {
@@ -65,10 +92,10 @@ class Paddle {
         });
     }
 
-    draw(ball) {
+    draw() {
         image(this.img, this.x, this.y, this.width, this.height)
-        this.move(ball);
-        this.hb.draw();
+        this.move();
+        this.hbs.forEach((hb) => hb.draw());
     }
 }
 

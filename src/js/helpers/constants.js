@@ -30,3 +30,8 @@ const ballHitBox = {
     plusX: 19,
     plusy: 19,
 }
+
+const paddleHitBox = {
+    width: 19,
+    height: 36.83,
+}
