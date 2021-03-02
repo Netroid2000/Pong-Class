@@ -2,12 +2,11 @@ let bg;
 let ball;
 let players = [];
 let mySoundLoop;
-let ballSoundKick;
 //Pre-carga
 function preload() {
     soundFormats('wav');
     mySoundLoop = loadSound('src/assets/sfx/musicloop');
-    ballSoundKick = loadSound('src/assets/sfx/kick');
+    
 }
 
 function setup(){

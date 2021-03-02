@@ -11,6 +11,8 @@ class Ball {
         //velocidad
         this.speedx = ballIni.speedX * randomPolarity();
         this.speedy = ballIni.speedY * randomPolarity();
+        //Sounds
+        this.ballSoundKick = loadSound('src/assets/sfx/kick');
         //Jugadores
         this.players = players;
         //HitBox
@@ -29,6 +31,7 @@ class Ball {
         } else if(this.players.some((player) => player.hb.wasHitSquare(this.hb))){
             this.speedx = speedAugment(this.speedx);
             this.speedx *= -1;
+            this.ballSoundKick.play();
         }
         if(this.y < 0 || this.y >= board.height - this.height){
             this.speedy *= -1;
