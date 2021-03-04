@@ -26,9 +26,25 @@ class Ball {
 
     move(){
         
-        if(this.x < 0 || this.x >= board.width - this.width){
-            this.restart();
-        } 
+        this.players.forEach((player) => {
+            if(player.pointsHb.wasHitSquare(this.hb)){
+                pts.playerPointPlusPlus(player.playerId);
+                this.restart();
+            }
+        });
+
+        this.players.forEach(function(player) {
+            //hbp = hitboxPlayer
+            player.hbs.forEach(function(hbp, index){
+                if(hbp.wasHitSquare(this.hb)){
+                    this.speedx = speedAugment(this.speedx);
+                    this.speedx *= -1;
+                    this.x += this.speedx;
+                    console.log("entro");
+                }
+            }.bind(this));
+        }.bind(this));
+
         /*if(this.players.some((player) => player.hb.wasHitSquare(this.hb))){
             this.speedx = speedAugment(this.speedx);
             this.speedx *= -1;

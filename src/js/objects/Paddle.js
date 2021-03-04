@@ -1,5 +1,5 @@
 class Paddle {
-    constructor(coords, controllSettings){
+    constructor(coords, controllSettings, playerId){
         //Coordenadas
         this.x = coords.x;
         this.y = coords.y;
@@ -27,38 +27,26 @@ class Paddle {
                 HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
             ),
         ];
-    }
+        //Puntaje HB
+        this.playerId = playerId;
+        let pointHbCoords
 
-    //Estructura basada en la del movimiento del Paddle
-    moveUpCollision(ball){
-        if(Math.sign(ball.speedy) == 1){
-            ball.speedy *= -1;
-            
+        if(playerId === playersId.player1){
+            pointHbCoords = HitBoxFactory.coords(board.width + boardHitBox.plusLimit, 0);
+        } else {
+            pointHbCoords = HitBoxFactory.coords(boardHitBox.plusLimit * (-1), 0);
         }
+
+        this.pointsHb = new HitBoxSquare(
+            pointHbCoords,
+            HitBoxFactory.squareDims(10, board.height),
+        );
     }
 
-    moveDownCollision(ball){
-        if(Math.sign(ball.speedy) == -1){
-            ball.speedy *= -1;
-        }
-    }
-
-    /*Cambia la direccion en Y de la bola si el jugador se movia al lado 
-    contrario*/
-    collision(ball){
-        this.controllSettings.forEach((controll) => {
-            if(keyIsDown(controll.key)){
-                this[controll.name+"Collision"](ball);
-            }
-        });
-    }
-    
     moveUp() {
         
-        this.hbs.forEach(function(hb){
-            console.log("entro FOR EACH");
-            if(hb.y >= 0){
-                //this.y -= this.speed;
+        this.hbs.forEach(function(hb, index){
+            if(hb.y >= index * hb.height){
                 hb.y -= this.speed;
             }
         }.bind(this));
@@ -66,22 +54,18 @@ class Paddle {
         if(this.y >= 0){
             this.y -= this.speed;
         }
-        console.log("entro");
     }
 
     moveDown(){
           
-        this.hbs.forEach(function(hb){
-            console.log("entro ENTRO FOR EACH");
-            if(hb.y <= board.height - hb.height){
-                //this.y += this.speed;
+        this.hbs.forEach(function(hb, index){
+            if(hb.y <= board.height - ((this.hbs.length - index) * hb.height)){
                 hb.y += this.speed;
             }
         }.bind(this));
         if(this.y <= board.height - paddle.height){
             this.y += this.speed;
         }
-        console.log("entro"); 
     }
 
     move() {

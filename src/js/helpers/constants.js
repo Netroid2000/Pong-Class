@@ -34,4 +34,14 @@ const ballHitBox = {
 const paddleHitBox = {
     width: 19,
     height: 36.83,
+    contHitBoxs: 3,
+}
+
+const playersId = {
+    player1: "p1",
+    player2: "p2",
+}
+
+const boardHitBox = {
+    plusLimit: 10,
 }
