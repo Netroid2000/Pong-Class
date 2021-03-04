@@ -1,9 +1,11 @@
 class HitBoxSquare{
-    constructor(coords, dims){
+    constructor(coords, dims, action){
         this.x = coords.x;
         this.y = coords.y;
         this.width = dims.width;
         this.height = dims.height;
+        //accion a realizar
+        this.action = action;
     }
     //hbs = hitboxSquare
     wasHitSquare(hbs){
@@ -19,6 +21,38 @@ class HitBoxSquare{
         rect(this.x, this.y, this.width, this.height);
     }
 
+    restartBall(ball) {
+        ball.x = ballIni.xIni;
+        ball.hb.x = ball.x + ballHitBox.plusX;
+        ball.y = ballIni.yIni;
+        ball.hb.y = ball.y + ballHitBox.plusy;
+        ball.speedx = ballIni.speedX * randomPolarity();
+        ball.speedy = ballIni.speedY * randomPolarity();
+        console.log("restartBall");
+    }
+
+    sumSpeedUp(ball) {
+        //ball.speedx = speedAugment(ball.speedx);
+        ball.speedy -= ballConsts.speedAugmenty;
+        ball.speedx *= -1;
+        console.log("Aumento a", ball.speedy);
+        ball.x += ball.speedx;
+    }
+
+    sumSpeedDown(ball) {
+        //ball.speedx = speedAugment(ball.speedx);
+        ball.speedy += ballConsts.speedAugmenty;
+        ball.speedx *= -1;
+        console.log("Aumento a", ball.speedy);
+        ball.x += ball.speedx;
+    }
+
+    normalBounce(ball){
+        //ball.speedx = speedAugment(ball.speedx);
+        ball.speedx *= -1;
+        console.log("Aumento a", ball.speedy);
+        ball.x += ball.speedx;
+    }
 }
 
 const HitBoxFactory = {
@@ -32,6 +66,11 @@ const HitBoxFactory = {
         return {
             width,
             height,
+        };
+    },
+    hitAction(action){
+        return {
+            action,
         };
     },
 };

@@ -17,14 +17,17 @@ class Paddle {
             new HitBoxSquare(
                 HitBoxFactory.coords(this.x + 8, this.y + 8),
                 HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
+                paddleHitBoxActions.sumSpeedUp,
             ),
             new HitBoxSquare(
                 HitBoxFactory.coords(this.x + 8, (this.y + paddleHitBox.height)  + 8),
                 HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
+                paddleHitBoxActions.normalBounce,
             ),
             new HitBoxSquare(
                 HitBoxFactory.coords(this.x + 8, this.y + (paddleHitBox.height*2)  + 8),
                 HitBoxFactory.squareDims(paddleHitBox.width, paddleHitBox.height),
+                paddleHitBoxActions.sumSpeedDown,
             ),
         ];
         //Puntaje HB
@@ -40,13 +43,14 @@ class Paddle {
         this.pointsHb = new HitBoxSquare(
             pointHbCoords,
             HitBoxFactory.squareDims(10, board.height),
+            paddleHitBoxActions.restartBall,
         );
     }
 
     moveUp() {
         
         this.hbs.forEach(function(hb, index){
-            if(hb.y >= index * hb.height){
+            if(hb.y >= (index * hb.height) + 8 ){
                 hb.y -= this.speed;
             }
         }.bind(this));
@@ -59,7 +63,7 @@ class Paddle {
     moveDown(){
           
         this.hbs.forEach(function(hb, index){
-            if(hb.y <= board.height - ((this.hbs.length - index) * hb.height)){
+            if(hb.y <= board.height - 8 - ((this.hbs.length - index) * hb.height)){
                 hb.y += this.speed;
             }
         }.bind(this));

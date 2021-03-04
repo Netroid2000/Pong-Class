@@ -11,7 +11,8 @@ const paddle = {
 const ballConsts = {
     width: 67,
     height: 67,
-    speedAugment: 0.1,
+    speedAugmentx: 0.1,
+    speedAugmenty: 0.5,
 }
 
 //Donde va a iniciar siempre la bola
@@ -35,6 +36,13 @@ const paddleHitBox = {
     width: 19,
     height: 36.83,
     contHitBoxs: 3,
+}
+
+const paddleHitBoxActions = {
+    restartBall: "restartBall",
+    sumSpeedUp: "sumSpeedUp",
+    sumSpeedDown: "sumSpeedDown",
+    normalBounce: "normalBounce",
 }
 
 const playersId = {

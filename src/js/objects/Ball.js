@@ -25,31 +25,30 @@ class Ball {
     
 
     move(){
-        
-        this.players.forEach((player) => {
-            if(player.pointsHb.wasHitSquare(this.hb)){
-                pts.playerPointPlusPlus(player.playerId);
-                this.restart();
-            }
-        });
 
         this.players.forEach(function(player) {
+            if(player.pointsHb.wasHitSquare(this.hb)){
+                pts.playerPointPlusPlus(player.playerId);
+                player.pointsHb[player.pointsHb.action](this);
+            }
+        }.bind(this));
+
+        
+        //Accion por hitboxPaddle
+        let actionGate = true;
+        
+        this.players.forEach(function(player) {
             //hbp = hitboxPlayer
-            player.hbs.forEach(function(hbp, index){
-                if(hbp.wasHitSquare(this.hb)){
-                    this.speedx = speedAugment(this.speedx);
-                    this.speedx *= -1;
-                    this.x += this.speedx;
-                    console.log("entro");
+            
+            player.hbs.forEach(function(hbp){
+                if(hbp.wasHitSquare(this.hb) && actionGate){
+                    //console.log(hbp.action);
+                    hbp[hbp.action](this);
+                    actionGate = false;
                 }
             }.bind(this));
         }.bind(this));
 
-        /*if(this.players.some((player) => player.hb.wasHitSquare(this.hb))){
-            this.speedx = speedAugment(this.speedx);
-            this.speedx *= -1;
-            this.ballSoundKick.play();
-        }*/
         if(this.y < 0 || this.y >= board.height - this.height){
             this.speedy *= -1;
         }
