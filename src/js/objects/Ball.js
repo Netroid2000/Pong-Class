@@ -7,7 +7,7 @@ class Ball {
         this.width = ballConsts.width;
         this.height = ballConsts.height;
         //imagen
-        this.img = loadImage("Pong-Class//src/assets/sprites/ball.png");
+        this.img = loadImage("Pong-Class/src/assets/sprites/ball.png");
         //velocidad
         this.speedx = ballIni.speedX * randomPolarity();
         this.speedy = ballIni.speedY * randomPolarity();

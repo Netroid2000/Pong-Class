@@ -7,7 +7,7 @@ class Paddle {
         this.width = paddle.width;
         this.height = paddle.height;
         //Imagen
-        this.img = loadImage("Pong-Class//src/assets/sprites/paddle.png");
+        this.img = loadImage("Pong-Class/src/assets/sprites/paddle.png");
         //Velocidad
         this.speed = 5;
         //Controles
