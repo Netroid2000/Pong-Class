@@ -7,12 +7,12 @@ let gameFont;
 //Pre-carga
 function preload() {
     soundFormats('wav');
-    mySoundLoop = loadSound('src/assets/sfx/musicloop');
+    mySoundLoop = loadSound('Pong-Class/src/assets/sfx/musicloop');
     
 }
 
 function setup(){
-    bg = loadImage("/src/assets/sprites/board.png");
+    bg = loadImage("Pong-Class//src/assets/sprites/board.png");
     
     
     //Creacion de Jugadores
