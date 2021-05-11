@@ -7,7 +7,7 @@ let gameFont;
 //Pre-carga
 function preload() {
     soundFormats('wav');
-    mySoundLoop = loadSound('src/assets/sfx/musicloop');
+    //mySoundLoop = loadSound('src/assets/sfx/musicloop');
     
 }
 
