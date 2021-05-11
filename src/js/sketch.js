@@ -12,7 +12,7 @@ function preload() {
 }
 
 function setup(){
-    bg = loadImage("Pong-Class/src/assets/sprites/board.png");
+    bg = loadImage("src/assets/sprites/board.png");
     
     
     //Creacion de Jugadores
